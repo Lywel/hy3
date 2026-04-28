@@ -1047,6 +1047,12 @@ void Hy3Layout::moveNodeToWorkspace(
 				Hy3Layout::warpCursorToBox(box.pos(), box.size());
 			}
 		}
+	} else {
+		// otherwise focus falls through to the workspace below a special workspace
+		auto* refocus = this->getWorkspaceFocusedNode(origin);
+		if (refocus != nullptr) {
+			refocus->focus(false, Desktop::FOCUS_REASON_KEYBIND);
+		}
 	}
 }
 

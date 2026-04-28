@@ -3,6 +3,7 @@
 # Upcoming
 
 - Fixed a crash when moving a fullscreen window to another workspace with follow.
+- Fixed focus staying on a window moved out of a workspace without follow.
 
 # hl0.57.0 and before
 
