@@ -27,6 +27,7 @@ inline CHyprSignalListener g_renderListener;
 inline CHyprSignalListener g_tickListener;
 inline CHyprSignalListener g_windowTitleListener;
 inline CHyprSignalListener g_urgentListener;
+inline CHyprSignalListener g_monitorFocusListener;
 
 inline Hy3Layout* hy3InstanceForWorkspace(PHLWORKSPACE ws) {
 	if (!ws || !ws->space() || !ws->space()->algorithm()) return nullptr;

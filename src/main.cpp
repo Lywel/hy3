@@ -143,6 +143,17 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
 		node->updateTabBarRecursive();
 	});
 
+	// focusState()->monitor() is only updated after monitor.focused fires
+	g_monitorFocusListener = Event::bus()->m_events.monitor.focused.listen([](PHLMONITOR monitor) {
+		for (auto& wp: g_tabGroups) {
+			auto* tg = wp.get();
+			if (!tg || !tg->workspace) continue;
+			for (auto& entry: tg->bar.entries) {
+				entry.setMonitorActive(entry.active->goal() == 1.0 && tg->workspace->m_monitor == monitor);
+			}
+		}
+	});
+
 	registerDispatchers();
 
 	HyprlandAPI::reloadConfig();
@@ -157,6 +168,7 @@ APICALL EXPORT void PLUGIN_EXIT() {
 	g_tickListener.reset();
 	g_windowTitleListener.reset();
 	g_urgentListener.reset();
+	g_monitorFocusListener.reset();
 
 	g_tabGroups.clear();
 	g_destroyingTabGroups.clear();
