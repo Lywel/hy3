@@ -6,6 +6,7 @@
 - Fixed focus staying on a window moved out of a workspace without follow.
 - Fixed a crash when changing the layout of the root group.
 - Fixed `makegroup` turning a tab group with one window into a split.
+- Fixed a crash when unloading hy3 with tab groups open.
 
 # hl0.57.0 and before
 

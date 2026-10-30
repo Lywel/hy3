@@ -151,6 +151,8 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
 }
 
 APICALL EXPORT void PLUGIN_EXIT() {
+	// Hyprland unregisters the layout after PLUGIN_EXIT, and that teardown queues tab groups
+	HyprlandAPI::removeAlgo(PHANDLE, "hy3");
 	g_renderListener.reset();
 	g_tickListener.reset();
 	g_windowTitleListener.reset();
