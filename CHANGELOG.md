@@ -9,6 +9,7 @@
 - Fixed a crash when unloading hy3 with tab groups open.
 - Fixed a crash when a workspace loses its monitor.
 - Fixed tab highlight not following monitor focus changes.
+- Fixed builds on distros that don't install the Lua headers in the default include path.
 
 # hl0.57.0 and before
 

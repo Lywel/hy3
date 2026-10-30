@@ -12,6 +12,7 @@ endif()
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(DEPS REQUIRED hyprland pixman-1 libdrm pango pangocairo libinput wayland-client xkbcommon)
+pkg_search_module(LUA REQUIRED lua55 lua5.5 lua-55 lua-5.5 lua>=5.5)
 
 add_library(hy3 SHARED
 	src/main.cpp
@@ -38,6 +39,6 @@ if (HY3_NO_VERSION_CHECK)
 	target_compile_definitions(hy3 PRIVATE -DHY3_NO_VERSION_CHECK=TRUE)
 endif()
 
-target_include_directories(hy3 PRIVATE ${DEPS_INCLUDE_DIRS})
+target_include_directories(hy3 PRIVATE ${DEPS_INCLUDE_DIRS} ${LUA_INCLUDE_DIRS})
 
 install(TARGETS hy3 LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
