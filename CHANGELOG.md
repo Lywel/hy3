@@ -7,6 +7,7 @@
 - Fixed a crash when changing the layout of the root group.
 - Fixed `makegroup` turning a tab group with one window into a split.
 - Fixed a crash when unloading hy3 with tab groups open.
+- Fixed a crash when a workspace loses its monitor.
 
 # hl0.57.0 and before
 

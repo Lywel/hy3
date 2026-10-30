@@ -217,8 +217,6 @@ void Hy3Layout::insertNode(UP<Hy3Node> node_up, std::optional<Vector2D> focalPoi
 
 	node_up->size_ratio = 1.0;
 
-	auto& monitor = ws->m_monitor;
-
 	Hy3Node* opening_into;
 	Hy3Node* opening_after = nullptr;
 
@@ -247,13 +245,7 @@ void Hy3Layout::insertNode(UP<Hy3Node> node_up, std::optional<Vector2D> focalPoi
 		static const auto tab_first_window =
 		    CConfigValue<Config::INTEGER>("plugin:hy3:tab_first_window");
 
-		// Use space work area if available, fall back to monitor
-		CBox wa_box(monitor->m_position, monitor->m_size);
-		auto algo = m_parent.lock();
-		if (algo) {
-			auto space = algo->space();
-			if (space) wa_box = space->workArea();
-		}
+		CBox wa_box = m_parent.lock()->space()->workArea();
 
 		auto rootUp = makeUnique<Hy3RootNode>(this);
 		rootUp->self = WP<Hy3Node>(rootUp);
@@ -435,7 +427,10 @@ void Hy3Layout::recalcGeometry(bool no_animation) {
 
 	hy3_log(LOG, "recalculating workspace {}", workspace->addressableName());
 
-	auto ma = workspace->m_monitor->logicalBoxMinusReserved();
+	auto monitor = workspace->m_monitor.lock();
+	if (!monitor) return;
+
+	auto ma = monitor->logicalBoxMinusReserved();
 	auto wa = space->workArea();
 
 	if (this->root) {
