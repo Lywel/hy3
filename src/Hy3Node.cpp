@@ -817,7 +817,7 @@ void Hy3Node::insertAndMerge(UP<Hy3Node> child, CollapsePolicy policy) {
 
 void Hy3Node::wrap(Hy3GroupLayout layout, GroupEphemeralityOption ephemeral, bool change) {
 	auto& parentGroup = this->parent->as_group();
-	if (change && !this->parent->is_root() && parentGroup.children.size() == 1) {
+	if (change && parentGroup.isSplit() && parentGroup.children.size() == 1) {
 		parentGroup.setLayout(layout);
 		parentGroup.setEphemeral(ephemeral);
 		this->layout()->recalcGeometry();

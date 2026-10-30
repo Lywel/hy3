@@ -709,7 +709,7 @@ void Hy3Layout::makeOppositeGroupOn(Hy3Node& node, GroupEphemeralityOption ephem
 	auto layout =
 	    group.layout == Hy3GroupLayout::SplitH ? Hy3GroupLayout::SplitV : Hy3GroupLayout::SplitH;
 
-	if (group.children.size() == 1) {
+	if (group.isSplit() && group.children.size() == 1) {
 		group.setLayout(layout);
 		group.setEphemeral(ephemeral);
 		this->recalcGeometry();
